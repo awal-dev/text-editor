@@ -50,6 +50,9 @@
     </div>
 
     <script>
+      const electron = require('electron')
+      const {ipcRenderer} = electron
+
         let textarea = document.querySelector('textarea')
         let defaultFontSize = 20
         function increaseFont(){
@@ -63,6 +66,7 @@
         function saveText(){
             let text = textarea.value
             console.log(text)
+            ipcRenderer.send('save', text)
         }
     
     </script>
