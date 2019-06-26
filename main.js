@@ -1,9 +1,10 @@
 const electron  = require('electron')
 const fs = require('fs')
-const {app, BrowserWindow, ipcMain} = electron
+const {app, BrowserWindow, ipcMain, dialog} = electron
+let win
 
 app.on('ready', ()=>{
-    let win = new BrowserWindow({
+    win = new BrowserWindow({
         webPreferences: {
             nodeIntegration: true
         }
@@ -14,10 +15,12 @@ app.on('ready', ()=>{
 
 ipcMain.on('save', (event, text)=>{
 //save the text to a file
-    console.log(text)
-    fs.writeFile('samplefile.txt', text, (err)=>{
-        if(err)console.log('there was an error', err)
-        console.log('file has been saved')
+    dialog.showSaveDialog(win, {defaultPath: 'filename.txt'}, (fullpath)=>{
+        if(fullpath){
+            fs.writeFile(fullpath, text, (err)=>{
+            if(err)console.log('there was an error', err)
+            console.log('file has been saved')
     })
-
+        }
+    })
 })
