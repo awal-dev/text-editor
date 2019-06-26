@@ -1,4 +1,5 @@
 const electron  = require('electron')
+const fs = require('fs')
 const {app, BrowserWindow, ipcMain} = electron
 
 app.on('ready', ()=>{
@@ -13,5 +14,10 @@ app.on('ready', ()=>{
 
 ipcMain.on('save', (event, text)=>{
 //save the text to a file
-console.log(text)
+    console.log(text)
+    fs.writeFile('samplefile.txt', text, (err)=>{
+        if(err)console.log('there was an error', err)
+        console.log('file has been saved')
+    })
+
 })
