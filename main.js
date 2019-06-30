@@ -37,3 +37,23 @@ function writeToFile(data){
         win.webContents.send('saved', 'success')
     })
 }
+
+
+const menuTemplate = [
+    {
+        label: "File",
+        submenu: [
+            {
+                label: "Save",
+                click(){ console.log('save from menu')}
+            },
+
+            {
+                label: "Save As",
+                click(){ console.log('save as from menu')}
+            }
+        ]
+    },
+
+    {role: "editMenu"}
+]
