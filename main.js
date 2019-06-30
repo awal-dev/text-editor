@@ -1,6 +1,6 @@
 const electron  = require('electron')
 const fs = require('fs')
-const {app, BrowserWindow, ipcMain, dialog} = electron
+const {app, BrowserWindow, ipcMain, dialog, Menu} = electron
 let win
 let filePath = undefined
 
@@ -11,6 +11,8 @@ app.on('ready', ()=>{
         }
     })
     win.loadFile('index.html')
+    const menu = Menu.buildFromTemplate(menuTemplate)
+    Menu.setApplicationMenu(menu)
 })
 
 
@@ -40,6 +42,12 @@ function writeToFile(data){
 
 
 const menuTemplate = [
+    process.platform=='darwin'? {
+        label: app.getName(),
+        submenu: [
+            {role: 'about'}
+        ]
+    } : {},
     {
         label: "File",
         submenu: [
