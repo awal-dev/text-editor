@@ -81,6 +81,10 @@
           setTimeout( function(){textarea.style.backgroundColor = ""} , 1000)
           
         })
+
+        ipcRenderer.on('save-clicked', ()=>{
+          saveText()
+        })
     
     </script>
   </body>

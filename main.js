@@ -53,15 +53,21 @@ const menuTemplate = [
         submenu: [
             {
                 label: "Save",
-                click(){ console.log('save from menu')}
+                accelerator: "CmdOrCtrl+S",
+                click(){ win.webContents.send('save-clicked')}
             },
 
             {
                 label: "Save As",
-                click(){ console.log('save as from menu')}
+                accelerator: "CmdOrCtrl+Shift+S",
+                click(){ 
+                    filePath = undefined
+                    win.webContents.send('save-clicked')
+                }
             }
         ]
     },
 
-    {role: "editMenu"}
+    {role: "editMenu"},
+    {role: "viewMenu"}
 ]
