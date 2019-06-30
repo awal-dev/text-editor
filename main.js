@@ -34,5 +34,6 @@ function writeToFile(data){
     fs.writeFile(filePath, data, (err)=>{
         if(err)console.log('there was an error', err)
         console.log('file has been saved')
+        win.webContents.send('saved', 'success')
     })
 }
