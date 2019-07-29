@@ -42,12 +42,12 @@ function writeToFile(data){
 
 
 const menuTemplate = [
-    process.platform=='darwin'? {
+    ...(process.platform == 'darwin'? [{
         label: app.getName(),
         submenu: [
-            {role: 'about'}
-        ]
-    } : {},
+       {role: 'about'}
+       ]
+       }] : []),
     {
         label: "File",
         submenu: [
